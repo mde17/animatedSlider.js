@@ -13,121 +13,55 @@
 			jQuery('.slider').animatedSlider({
 				'width':600,
 				'height':300,
-				'slide_interval':6500,
+				'slide_interval':5000,
 				'loader':true,
 				'slide_animation_data' : 
-					[[[
-						{
+					[//slides
+						[{
 							'target_slide_element':'.img-logo',
 							'animation_position':0,
 			            	'animation_type':'bounceInUp'
-							},//inside element
+							},
 						{
 							'target_slide_element':'.img-mobile',
 							'animation_position':0.5,
 			            	'animation_type':'bounceInUp'
-							},//inside element
+							},
 						{
 							'target_slide_element':'.img-tablet',
 							'animation_position':1,
 			            	'animation_type':'bounceInUp'
-							},//inside element
+							},
 						{
 							'target_slide_element':'.img-laptop',
 							'animation_position':1.5,
 			            	'animation_type':'bounceInUp'
-							}//inside element
-					 	],//inside slide
-					 	[
-					 	{
+							}],//slide1
+					 	
+					 	[{
 							'target_slide_element':'h1',
 							'animation_position':0,
 			            	'animation_type':'bounceInUp'
-							},//inside element
+							},
+						{
+							'target_slide_element':'p',
+							'animation_position':0.5,
+			            	'animation_type':'bounceInUp'
+							}],//slide2
+							
+					 	[{
+							'target_slide_element':'h1',
+							'animation_position':0,
+			            	'animation_type':'bounceInUp'
+							},
 						{
 							'target_slide_element':'p',
 							'animation_position':0.5,
 			            	'animation_type':'bounceInUp'
 							}
-					 	],
-					 	[
-					 	{
-							'target_slide_element':'h1',
-							'animation_position':0,
-			            	'animation_type':'bounceInUp'
-							},//inside element
-						{
-							'target_slide_element':'p',
-							'animation_position':0.5,
-			            	'animation_type':'bounceInUp'
-							}
-					 	]
-					]]
+					 	]//slide3
+					]
 				
-				
-						/*
-						 [{
-			            	'slide_number':1,
-			            	'target_slide_element':'.img-logo',
-			            	'animation_position':0,
-			            	'animation_type':'bounceInUp'
-			          	},{
-			            	'slide_number':1,
-			            	'target_slide_element':'.img-tablet',
-			            	'animation_position':4.5,
-			            	'animation_type':'bounceOutDown'
-			            },{
-			            	'slide_number':1,
-			            	'target_slide_element':'.img-mobile',
-			            	'animation_position':0.5,
-			            	'animation_type':'bounceInUp'
-			            },{
-			            	'slide_number':1,
-			            	'target_slide_element':'.img-tablet',
-			            	'animation_position':1,
-			            	'animation_type':'bounceInUp'
-			            },{
-			            	'slide_number':1,
-			            	'target_slide_element':'.img-laptop',
-			            	'animation_position':1.5,
-			            	'animation_type':'bounceInUp'
-			            },{
-			            	'slide_number':1,
-			            	'target_slide_element':'.img-laptop',
-			            	'animation_position':4,
-			            	'animation_type':'bounceOutDown'
-			            },{
-			            	'slide_number':1,
-			            	'target_slide_element':'.img-mobile',
-			            	'animation_position':5,
-			            	'animation_type':'bounceOutDown'
-			            },{
-			            	'slide_number':1,
-			            	'target_slide_element':'.img-logo',
-			            	'animation_position':5.5,
-			            	'animation_type':'bounceOutDown'
-			          	},{
-			            	'slide_number':2,
-			            	'target_slide_element':'h1',
-			            	'animation_position':0,
-			            	'animation_type':'bounceInUp'
-			            },{
-			            	'slide_number':2,
-			            	'target_slide_element':'p',
-			            	'animation_position':1,
-			            	'animation_type':'bounceInUp'
-			           },{
-			            	'slide_number':3,
-			            	'target_slide_element':'h1',
-			            	'animation_position':0,
-			            	'animation_type':'bounceInRight'
-			           },{
-			            	'slide_number':3,
-			            	'target_slide_element':'p',
-			            	'animation_position':1,
-			            	'animation_type':'bounceInLeft'
-			           }]
-						 * */
 			});
 		});
         </script>

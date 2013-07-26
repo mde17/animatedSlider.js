@@ -96,23 +96,12 @@
 		//Play Slides BEGIN
 		function playSlide(){
 				displayLoader();
-				console.log(settings.slide_animation_data);
-				console.log(curSlide);
-				console.log(settings.slide_animation_data[0][curSlide]);
-				/*for(var i = 0; i < settings.slide_animation_data.length;i++){
-					slideAnimation(
-							settings.slide_animation_data[i].slide_number,
-							settings.slide_animation_data[i].target_slide_element,
-							settings.slide_animation_data[i].animation_position,
-							settings.slide_animation_data[i].animation_type
-						);
-				}*/
-				for(var i =0;i<settings.slide_animation_data[0][curSlide].length;i++){
+				for(var i =0;i<settings.slide_animation_data[curSlide].length;i++){
 								slideAnimation(
 									curSlide+1,
-									settings.slide_animation_data[0][curSlide][i].target_slide_element,
-									settings.slide_animation_data[0][curSlide][i].animation_position,
-									settings.slide_animation_data[0][curSlide][i].animation_type
+									settings.slide_animation_data[curSlide][i].target_slide_element,
+									settings.slide_animation_data[curSlide][i].animation_position,
+									settings.slide_animation_data[curSlide][i].animation_type
 								);
 				}
 				slider.find('.slider-contents').children('div').css('display','none');
