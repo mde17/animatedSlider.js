@@ -1,22 +1,24 @@
 /*
- slider.js
+ animated-slider.js
  CREATED BY: Espi
  v1 07-25-2013
  * */
 
 (function($) {
-    $.fn.contentSlider = function( options ) {
+    $.fn.animatedSlider = function( options ) {
     	var slider = this;
         var settings = $.extend({
             'height': null,
             'width': null,
             'slide_interval':null,
             'loader':null,
-            'slide_animation_data' :null
+            'slide_animation_data' :[{}]
         },options);
         
         var collectedData = {
+        	//html content of the slider
         	cur_html: this.html(),
+        	//number of slides
         	totalSlides: this.children('div')
         }
         

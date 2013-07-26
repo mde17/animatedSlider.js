@@ -3,12 +3,53 @@
     <head>
         <title>Content-slider</title>
         <link rel="stylesheet" href="animate.css" type="text/css">
-        <link rel="stylesheet" href="slider.css" type="text/css">
+        <link rel="stylesheet" href="animated-slider.css" type="text/css">
         <link rel="stylesheet" href="main.css" type="text/css">
         <script src="jquery-1.10.2.min.js"></script>
         <script src="modernizr.js"></script>
-        <script src="slider.js"></script>
-        <script src="script.js"></script>
+        <script src="animated-slider.js"></script>
+        <script>
+        	jQuery(document).ready(function(){
+			jQuery('.slider').animatedSlider({
+				'width':600,
+				'height':300,
+				'slide_interval':3000,
+				'loader':true,
+				'slide_animation_data' : 
+						[{
+			            	'slide_number':1,
+			            	'target_slide_element':'h1',
+			            	'animation_position':0,
+			            	'animation_type':'rotateInDownLeft'
+			          	},{
+			            	'slide_number':1,
+			            	'target_slide_element':'p',
+			            	'animation_position':1,
+			            	'animation_type':'rotateInDownLeft'
+			            },{
+			            	'slide_number':2,
+			            	'target_slide_element':'h1',
+			            	'animation_position':0,
+			            	'animation_type':'bounceInUp'
+			            },{
+			            	'slide_number':2,
+			            	'target_slide_element':'p',
+			            	'animation_position':1,
+			            	'animation_type':'bounceInUp'
+			           },{
+			            	'slide_number':3,
+			            	'target_slide_element':'h1',
+			            	'animation_position':0,
+			            	'animation_type':'bounceInRight'
+			           },{
+			            	'slide_number':3,
+			            	'target_slide_element':'p',
+			            	'animation_position':1,
+			            	'animation_type':'bounceInLeft'
+			           }]
+			});
+		});
+        </script>
     </head>
     <body>
         <div class="slider">
