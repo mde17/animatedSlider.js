@@ -1,0 +1,21 @@
+div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+label,caption, article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 14px;
+    font: inherit;
+    vertical-align: baseline;
+}
+.slider .slider-contents {overflow:hidden;border:1px solid #676767;}
+.slide-nav a {width:20px;height:20px;float:left;list-style: none;}
+.progress-bar {width:0px;background-color:#676767;height:2px;top: -2px;overflow:visible !important;display:block !important;position: relative;}
