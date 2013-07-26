@@ -13,20 +13,100 @@
 			jQuery('.slider').animatedSlider({
 				'width':600,
 				'height':300,
-				'slide_interval':3000,
+				'slide_interval':6500,
 				'loader':true,
 				'slide_animation_data' : 
-						[{
+					[[[
+						{
+							'target_slide_element':'.img-logo',
+							'animation_position':0,
+			            	'animation_type':'bounceInUp'
+							},//inside element
+						{
+							'target_slide_element':'.img-mobile',
+							'animation_position':0.5,
+			            	'animation_type':'bounceInUp'
+							},//inside element
+						{
+							'target_slide_element':'.img-tablet',
+							'animation_position':1,
+			            	'animation_type':'bounceInUp'
+							},//inside element
+						{
+							'target_slide_element':'.img-laptop',
+							'animation_position':1.5,
+			            	'animation_type':'bounceInUp'
+							}//inside element
+					 	],//inside slide
+					 	[
+					 	{
+							'target_slide_element':'h1',
+							'animation_position':0,
+			            	'animation_type':'bounceInUp'
+							},//inside element
+						{
+							'target_slide_element':'p',
+							'animation_position':0.5,
+			            	'animation_type':'bounceInUp'
+							}
+					 	],
+					 	[
+					 	{
+							'target_slide_element':'h1',
+							'animation_position':0,
+			            	'animation_type':'bounceInUp'
+							},//inside element
+						{
+							'target_slide_element':'p',
+							'animation_position':0.5,
+			            	'animation_type':'bounceInUp'
+							}
+					 	]
+					]]
+				
+				
+						/*
+						 [{
 			            	'slide_number':1,
-			            	'target_slide_element':'h1',
+			            	'target_slide_element':'.img-logo',
 			            	'animation_position':0,
-			            	'animation_type':'rotateInDownLeft'
+			            	'animation_type':'bounceInUp'
 			          	},{
 			            	'slide_number':1,
-			            	'target_slide_element':'p',
-			            	'animation_position':1,
-			            	'animation_type':'rotateInDownLeft'
+			            	'target_slide_element':'.img-tablet',
+			            	'animation_position':4.5,
+			            	'animation_type':'bounceOutDown'
 			            },{
+			            	'slide_number':1,
+			            	'target_slide_element':'.img-mobile',
+			            	'animation_position':0.5,
+			            	'animation_type':'bounceInUp'
+			            },{
+			            	'slide_number':1,
+			            	'target_slide_element':'.img-tablet',
+			            	'animation_position':1,
+			            	'animation_type':'bounceInUp'
+			            },{
+			            	'slide_number':1,
+			            	'target_slide_element':'.img-laptop',
+			            	'animation_position':1.5,
+			            	'animation_type':'bounceInUp'
+			            },{
+			            	'slide_number':1,
+			            	'target_slide_element':'.img-laptop',
+			            	'animation_position':4,
+			            	'animation_type':'bounceOutDown'
+			            },{
+			            	'slide_number':1,
+			            	'target_slide_element':'.img-mobile',
+			            	'animation_position':5,
+			            	'animation_type':'bounceOutDown'
+			            },{
+			            	'slide_number':1,
+			            	'target_slide_element':'.img-logo',
+			            	'animation_position':5.5,
+			            	'animation_type':'bounceOutDown'
+			          	},{
 			            	'slide_number':2,
 			            	'target_slide_element':'h1',
 			            	'animation_position':0,
@@ -47,6 +127,7 @@
 			            	'animation_position':1,
 			            	'animation_type':'bounceInLeft'
 			           }]
+						 * */
 			});
 		});
         </script>
@@ -54,8 +135,10 @@
     <body>
         <div class="slider">
             <div class="slide1">
-                <h1>Slide1</h1>
-                <p>content 1</p>
+            	<img src="img/logo.png" class="img-logo"/>
+                <img src="img/mobile.png" class="img-mobile"/>
+                <img src="img/tablet.png" class="img-tablet"/>
+                <img src="img/laptop.png" class="img-laptop"/>
             </div>
             <div class="slide2">
                 <h1>Slide2</h1>
