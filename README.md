@@ -7,6 +7,7 @@ it uses the animate.css from Dan Eden -> http://daneden.me/animate/
 <ul>
 	<li>height - height of the slider</li>
 	<li>width - width of the slider</li>
+	<li>slide_interval - time per slide in miliseconds</li>
 	<li>loader - boolean</li>
 	<li>slide_animation_data - array</li>
 </ul>
