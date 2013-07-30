@@ -7,13 +7,15 @@
             'slide_interval':3000,
             'loader':true,
             'pages':true,
+            'pause':true
         },
         $element,
         totalSlides,
         slide_animation_timeout,
         curSlide,
         slideTimer,
-        that;
+        that,
+        slide_status;
 	/* variable END */
 
     /* The actual plugin constructor */
@@ -58,6 +60,12 @@
 		}
 		/* display page nav END */
 	  
+	  	/* display play and pause controls BEGIN */
+		if(this.options.pause == true){
+	   		$element.append('<div class="pause-play-control playing"><a class="play-slide">Play</a><a class="pause-slide">Pause</a></div>');
+		}
+		/* display play and pause controls END */
+	  
 		/* display slider pages if slides are more than 1 BEGIN */
 		if(totalSlides.length > 1){
 			$element.append('<div class="slider-controller"><a class="slider-prev">prev</a><a class="slider-next">next</a></div>');
@@ -75,6 +83,24 @@
 			that.prev();
 		})
 		/* prev button clicked END */
+		
+		/* pause button clicked BEGIN */
+		$element.find('.pause-slide').on("click",function(){
+			that.pause();
+			$element.find('.pause-play-control').removeClass('playing').addClass('paused');
+		})
+		/* pause button clicked END */
+		
+		/* play button clicked BEGIN */
+		$element.find('.play-slide').on("click",function(){
+			if(slide_status == 'paused'){
+				that.start_animation();
+				that.play();
+				slide_status = 'playing';
+				$element.find('.pause-play-control').removeClass('paused').addClass('playing');
+			}
+		})
+		/* play button clicked END */
 		
 		/* slider page clicked BEGIN */
 		$element.find('.slide-nav a').on("click",function(){
@@ -136,8 +162,12 @@
     
     Plugin.prototype.next = function(){
 		curSlide = curSlide;
-		this.start_animation();
-		this.play();
+		if(slide_status=='paused'){
+			this.play();
+		}else{
+			this.start_animation();
+			this.play();
+		}
     }
     
     Plugin.prototype.prev = function(){
@@ -148,8 +178,18 @@
 			}else{
 				curSlide = curSlide-2;
 			}
-		this.start_animation();
-		this.play();
+			
+		if(slide_status=='paused'){
+			this.play();
+		}else{
+			this.start_animation();
+			this.play();
+		}
+    }
+    
+    Plugin.prototype.pause = function(){
+    	clearInterval(slideTimer);
+    	slide_status = 'paused';
     }
     
     Plugin.prototype.pageClick = function(page_index){
