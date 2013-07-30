@@ -1,132 +1,179 @@
-/*
- animated-slider.js
- CREATED BY: Espi
- v1 07-25-2013
- * */
+;(function ( $, window, document, undefined ) {
+    /* variable BEGIN */
+    var pluginName = 'animatedSlider',
+        defaults = {
+            'height': 300,
+            'width': 600,
+            'slide_interval':3000,
+            'loader':true,
+            'pages':true,
+        },
+        $element,
+        totalSlides,
+        slide_animation_timeout,
+        curSlide,
+        slideTimer,
+        that;
+	/* variable END */
 
-(function($) {
-    $.fn.animatedSlider = function( options ) {
-    	var slider = this;
-        var settings = $.extend({
-            'height': null,
-            'width': null,
-            'slide_interval':null,
-            'loader':null,
-            'slide_animation_data' :[{}]
-        },options);
+    /* The actual plugin constructor */
+    function Plugin( element, options ) {
+        this.element = element;
+		$element = $(this.element);
+        this.options = $.extend( {}, defaults, options) ;
         
-        var collectedData = {
-        	//html content of the slider
-        	cur_html: this.html(),
-        	//number of slides
-        	totalSlides: this.children('div')
-        }
+        this._defaults = defaults;
+        this._name = pluginName;
         
-        var slideTimer = window.setInterval(playSlide,settings.slide_interval);
-        var curSlide = 0;
+        /* a varible used for the setTimeOut function */
+        that = this;
         
-        this.html( function() {
-            return '<div class="slider-contents">'+collectedData.cur_html+'</div>';
+        /* initializes the slider */
+        this.init();
+    }
+
+	/* INIT BEGIN */
+    Plugin.prototype.init = function () {
+		totalSlides = $element.children(),
+			//slideTimer = window.setInterval(playSlide,settings.slide_interval),
+			curSlide = 0;
+		
+		/* adds slides wrapper BEGIN */
+		$element.html( function() {
+            return '<div class="slider-contents">'+$element.html()+'</div>';
         });
-        
-        //display page nav BEGIN
-        this.append('<div class="slide-nav"></div>');
-        this.find('.slider-contents').children('div').addClass('slides');
-        this.find(".slider-contents,.slider-contents .slides").css({'width':settings.width,'height':settings.height});
-        for(var i = 0; i < collectedData.totalSlides.length;i++){
-			this.find('.slide-nav').append('<a>'+i+'</a>');
-		}
-		//display page nav END
-
-		//display slider pages if slides are more than 1 BEGIN
-		if(collectedData.totalSlides.length > 1){
-			this.append('<div class="slider-controller"><a class="slider-prev">prev</a><a class="slider-next">next</a></div>');
-		}
-		//display slider pages if slides are more than 1 END
-		
-		//slider page clicked BEGIN
-		this.find('.slide-nav a').on("click",function(){
-			clearInterval(slideTimer);
-			slideTimer = window.setInterval(playSlide,settings.slide_interval);
-			curSlide = slider.find(this).index();
-			playSlide();
-		});
-		//slider page clicked END
-		
-		//next button clicked BEGIN
-		this.find('.slider-controller .slider-next').on("click",function(){
-			clearInterval(slideTimer);
-			slideTimer = window.setInterval(playSlide,settings.slide_interval);
-			curSlide = curSlide;
-			playSlide();
-		});
-		//next button clicked END
-		
-		//prev button clicked BEGIN
-		this.find('.slider-controller .slider-prev').on("click",function(){
-			clearInterval(slideTimer);
-			slideTimer = window.setInterval(playSlide,settings.slide_interval);
-			
-			if(curSlide==1){
-				curSlide = collectedData.totalSlides.length -1;
-			}else if(curSlide == 0){
-				curSlide = collectedData.totalSlides.length -2;
-			}else{
-				curSlide = curSlide-2;
-			}
-			
-			playSlide();
-		});
-		//prev button clicked END
-		
-		//hide the slides BEGIN
-		this.find('.slides').css('display','none');
-		//hide the slides END
-		
-		//display loader BEGIN
-		function displayLoader(){
-			if(settings.loader==true){
-				slider.find('.progress-bar').remove();
-				slider.find('.slider-contents').append('<div class="progress-bar">sadasd</div>');
-				slider.find('.progress-bar').animate({width:'+=100%'},settings.slide_interval);
+        /* adds slides wrapper END */
+       
+		/*add class and styles to slider and slides BEGIN */
+        $element.find('.slider-contents').children('div').addClass('slides');
+        $element.find(".slider-contents,.slider-contents .slides").css({'width':this.options.width,'height':this.options.height});
+		/*add class and styles to slider and slides END */
+	  
+		/* display page nav BEGIN */
+		if(this.options.pages == true){
+	   		$element.append('<div class="slide-nav"></div>');
+	        for(var i = 0; i < totalSlides.length;i++){
+				$element.find('.slide-nav').append('<a>'+i+'</a>');
 			}
 		}
-		//display loader END
-
-		//Play Slides BEGIN
-		function playSlide(){
-				displayLoader();
-				for(var i =0;i<settings.slide_animation_data[curSlide].length;i++){
-								slideAnimation(
+		/* display page nav END */
+	  
+		/* display slider pages if slides are more than 1 BEGIN */
+		if(totalSlides.length > 1){
+			$element.append('<div class="slider-controller"><a class="slider-prev">prev</a><a class="slider-next">next</a></div>');
+		}
+		/* display slider pages if slides are more than 1 END */
+		
+		/* next button clicked BEGIN */
+		$element.find('.slider-controller .slider-next').on("click",function(){
+			that.next();
+		})
+		/* next button clicked END */
+		
+		/* prev button clicked BEGIN */
+		$element.find('.slider-controller .slider-prev').on("click",function(){
+			that.prev();
+		})
+		/* prev button clicked END */
+		
+		/* slider page clicked BEGIN */
+		$element.find('.slide-nav a').on("click",function(){
+			that.pageClick(this);
+		});
+		/* slider page clicked END */
+		
+		/* starts the slides BEGIN */
+		this.start_animation();
+		/* starts the slides END */
+		
+		/* plays the first slide - a fix for start_animation() because it has a delay based on the slide_interval */
+		this.play();
+		/* this.play END  */
+    };
+    /* INIT END */
+    
+    Plugin.prototype.hideSlides = function(){
+    	/* hide the slides BEGIN */
+		$element.find('.slides').css('display','none');
+		/* hide the slides END */
+    }
+    
+    Plugin.prototype.start_animation = function(){
+    	/* clears the view and the timer BEGIN */
+    	this.hideSlides();
+    	clearInterval(slideTimer);
+    	/* clears the view and the timer END */
+    	
+    	slideTimer = setInterval(this.play,this.options.slide_interval);
+    }
+    
+    Plugin.prototype.play = function(){
+    	that.loader();
+    	for(var i =0;i<that.options.slide_animation_data[curSlide].length;i++){
+								that._slideAnimation(
 									curSlide+1,
-									settings.slide_animation_data[curSlide][i].target_slide_element,
-									settings.slide_animation_data[curSlide][i].animation_position,
-									settings.slide_animation_data[curSlide][i].animation_type
+									that.options.slide_animation_data[curSlide][i].target_element,
+									that.options.slide_animation_data[curSlide][i].animation_frame,
+									that.options.slide_animation_data[curSlide][i].animation_type
 								);
-				}
-				slider.find('.slider-contents').children('div').css('display','none');
-				slider.find('.slide'+(curSlide+1)).css('display','block');
-				if(curSlide>=collectedData.totalSlides.length-1){
+				}//for loop END
+				$element.find('.slider-contents').children('div').css('display','none');
+				$element.find('.slide'+(curSlide+1)).css('display','block');
+				if(curSlide>=totalSlides.length-1){
 					curSlide = 0;
 				}else{
 					curSlide++;
-				}
-		}
-		//Play Slides END
-		
-		//slide animation function BEGIN
-		var slide_animation_timeout;
-		function slideAnimation(slide_number,target_slide_element,animation_position,animation_type){
-			slider.find('.slide'+slide_number+' '+target_slide_element).removeClass().css('display','none').addClass(helperReplaceChar(target_slide_element));
-			slide_animation_timeout = setTimeout(function(){slider.find('.slide'+slide_number+' '+target_slide_element).addClass('animated '+animation_type).css('display','block');},(animation_position*1000));
-		}
-		//slide animation function END
-
-		function helperReplaceChar(s_char){
-			return s_char.replace(/.|#|h1|p||div|ul|li|ol|span/,' ');
-		}
-		
-		//execute slide
-		playSlide();
+				}//if-else END
     }
-}(jQuery));
+    
+    Plugin.prototype.loader = function(){
+    	if(this.options.loader==true){
+				$element.find('.progress-bar').remove();
+				$element.find('.slider-contents').append('<div class="progress-bar"></div>');
+				$element.find('.progress-bar').animate({width:'+=100%'},this.options.slide_interval);
+			}
+    }
+    
+    Plugin.prototype.next = function(){
+		curSlide = curSlide;
+		this.start_animation();
+		this.play();
+    }
+    
+    Plugin.prototype.prev = function(){
+    	if(curSlide==1){
+				curSlide = totalSlides.length -1;
+			}else if(curSlide == 0){
+				curSlide = totalSlides.length -2;
+			}else{
+				curSlide = curSlide-2;
+			}
+		this.start_animation();
+		this.play();
+    }
+    
+    Plugin.prototype.pageClick = function(page_index){
+		curSlide = $element.find(page_index).index();
+		this.start_animation();
+		this.play();
+    }
+
+	Plugin.prototype._slideAnimation = function(slide_number,target_slide_element,animation_position,animation_type){
+		$element.find('.slide'+slide_number+' '+target_slide_element).removeClass().css('display','none').addClass(this.helperReplaceChar(target_slide_element));
+		slide_animation_timeout = setTimeout(function(){$element.find('.slide'+slide_number+' '+target_slide_element).addClass('animated '+animation_type).css('display','block');},(animation_position*1000));
+	}
+	
+	Plugin.prototype.helperReplaceChar = function(string_data){
+		return string_data.replace(/.|#|h1|p||div|ul|li|ol|span/,' ');
+	}
+
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName, 
+                new Plugin( this, options ));
+            }
+        });
+    }
+
+})( jQuery, window, document );
