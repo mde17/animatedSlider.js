@@ -7,7 +7,8 @@
             'slide_interval':3000,
             'loader':true,
             'pages':true,
-            'pause':true
+            'pause':true,
+            'controls':true
         },
         $element,
         totalSlides,
@@ -15,7 +16,9 @@
         curSlide,
         slideTimer,
         that,
-        slide_status;
+        slide_status,
+		imgs = 1,
+		totalImg =0;
 	/* variable END */
 
     /* The actual plugin constructor */
@@ -31,29 +34,36 @@
         that = this;
         
         /* initializes the slider */
+        //$element.load(function(){that.init();});
         this.init();
     }
 
 	/* INIT BEGIN */
     Plugin.prototype.init = function () {
-		totalSlides = $element.children(),
+    		totalImg = $element.find('img').length;
+    		totalSlides = $element.children(),
 			//slideTimer = window.setInterval(playSlide,settings.slide_interval),
 			curSlide = 0;
-		
 		/* adds slides wrapper BEGIN */
 		$element.html( function() {
-            return '<div class="slider-contents">'+$element.html()+'</div>';
-        });
+            return '<div class="slider-contents">'+$element.html()+'</div><div class="controls"></div>';
+        }).css({'width': that.options.width+130});
         /* adds slides wrapper END */
-       
+        
+        /* adds a preloader progress bar BEGIN */
+        $element.append('<div class="img-preloader" style="position:absolute;height:5px;background-color:#aeaeae;display:block;margin-top:'+
+        ((((this.options.height-(this.options.height-5)/2))+38)*-(1))+'px;margin-left:'+
+        (((this.options.width+130)/2)-50)+'px;"></div>');
+        /* adds a preloader progress bar END */
+        
 		/*add class and styles to slider and slides BEGIN */
         $element.find('.slider-contents').children('div').addClass('slides');
-        $element.find(".slider-contents,.slider-contents .slides").css({'width':this.options.width,'height':this.options.height});
+        $element.find(".slider-contents,.slider-contents .slides").css({'width':this.options.width,'height':this.options.height,'margin':'0 auto'});
 		/*add class and styles to slider and slides END */
 	  
 		/* display page nav BEGIN */
 		if(this.options.pages == true){
-	   		$element.append('<div class="slide-nav"></div>');
+	   		$element.find('.controls').append('<div class="slide-nav"></div>');
 	        for(var i = 0; i < totalSlides.length;i++){
 				$element.find('.slide-nav').append('<a>'+i+'</a>');
 			}
@@ -62,33 +72,37 @@
 	  
 	  	/* display play and pause controls BEGIN */
 		if(this.options.pause == true){
-	   		$element.append('<div class="pause-play-control playing"><a class="play-slide">Play</a><a class="pause-slide">Pause</a></div>');
+	   		$element.find('.controls').append('<div class="pause-play-control playing"><a class="play-slide" style="display:none;">Play</a><a class="pause-slide">Pause</a></div>');
 		}
 		/* display play and pause controls END */
 	  
 		/* display slider pages if slides are more than 1 BEGIN */
-		if(totalSlides.length > 1){
-			$element.append('<div class="slider-controller"><a class="slider-prev">prev</a><a class="slider-next">next</a></div>');
+		if(totalSlides.length > 1 && this.options.controls === true ){
+			$element.append('<div class="slider-controller"><a class="slider-prev"><</a><a class="slider-next">></a></div>');
+			$element.find('.slider-next').css({'margin-top':(((this.options.height-(this.options.height-46)/2))+38)*-1,'margin-left':this.options.width+130-46});
+			$element.find('.slider-prev').css({'margin-top':(((this.options.height-(this.options.height-46)/2))+38)*-1});
 		}
 		/* display slider pages if slides are more than 1 END */
 		
 		/* next button clicked BEGIN */
 		$element.find('.slider-controller .slider-next').on("click",function(){
 			that.next();
-		})
+		});
 		/* next button clicked END */
 		
 		/* prev button clicked BEGIN */
 		$element.find('.slider-controller .slider-prev').on("click",function(){
 			that.prev();
-		})
+		});
 		/* prev button clicked END */
 		
 		/* pause button clicked BEGIN */
 		$element.find('.pause-slide').on("click",function(){
 			that.pause();
 			$element.find('.pause-play-control').removeClass('playing').addClass('paused');
-		})
+			jQuery(this).css('display','none');
+			$element.find('.play-slide').css('display','block');
+		});
 		/* pause button clicked END */
 		
 		/* play button clicked BEGIN */
@@ -99,7 +113,9 @@
 				slide_status = 'playing';
 				$element.find('.pause-play-control').removeClass('paused').addClass('playing');
 			}
-		})
+			jQuery(this).css('display','none');
+			$element.find('.pause-slide').css('display','block');
+		});
 		/* play button clicked END */
 		
 		/* slider page clicked BEGIN */
@@ -107,16 +123,21 @@
 			that.pageClick(this);
 		});
 		/* slider page clicked END */
-		
-		/* starts the slides BEGIN */
+		this.hideSlides();
+		this.preloadImages();
+		//this.startSlider();
+    };
+    /* INIT END */
+    
+    Plugin.prototype.startSlider = function(){
+    	/* starts the slides BEGIN */
 		this.start_animation();
 		/* starts the slides END */
 		
 		/* plays the first slide - a fix for start_animation() because it has a delay based on the slide_interval */
 		this.play();
 		/* this.play END  */
-    };
-    /* INIT END */
+    }
     
     Plugin.prototype.hideSlides = function(){
     	/* hide the slides BEGIN */
@@ -165,8 +186,7 @@
 		if(slide_status=='paused'){
 			this.play();
 		}else{
-			this.start_animation();
-			this.play();
+			this.startSlider();
 		}
     }
     
@@ -182,8 +202,7 @@
 		if(slide_status=='paused'){
 			this.play();
 		}else{
-			this.start_animation();
-			this.play();
+			this.startSlider();
 		}
     }
     
@@ -194,8 +213,11 @@
     
     Plugin.prototype.pageClick = function(page_index){
 		curSlide = $element.find(page_index).index();
-		this.start_animation();
-		this.play();
+		if(slide_status=='paused'){
+			this.play();
+		}else{
+			this.startSlider();
+		}
     }
 
 	Plugin.prototype._slideAnimation = function(slide_number,target_slide_element,animation_position,animation_type){
@@ -205,6 +227,22 @@
 	
 	Plugin.prototype.helperReplaceChar = function(string_data){
 		return string_data.replace(/.|#|h1|p||div|ul|li|ol|span/,' ');
+	}
+	
+	Plugin.prototype.preloadImages = function(){
+		var image_load_division = 100/totalImg;
+		$element.find('img').each(function(e){
+			$(this).on("load",function(){
+				if(totalImg == imgs){
+					that.startSlider();
+					$element.find('.img-preloader').css('display','none');
+				}else{
+					imgs++;
+					$element.find('.img-preloader').animate({width:+image_load_division*imgs},500);
+				}
+			});
+		});
+
 	}
 
     $.fn[pluginName] = function ( options ) {
