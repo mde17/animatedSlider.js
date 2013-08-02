@@ -155,7 +155,7 @@
     }
     
     Plugin.prototype.play = function(){
-    	that.loader();
+    	
     	for(var i =0;i<that.options.slide_animation_data[curSlide].length;i++){
 								that._slideAnimation(
 									curSlide+1,
@@ -171,6 +171,7 @@
 				}else{
 					curSlide++;
 				}//if-else END
+				that.loader();
     }
     
     Plugin.prototype.loader = function(){
