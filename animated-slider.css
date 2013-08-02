@@ -16,6 +16,42 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
-.slider .slider-contents {overflow:hidden;border:1px solid #676767;}
-.slide-nav a {width:20px;height:20px;float:left;list-style: none;}
-.progress-bar {width:0px;background-color:#676767;height:2px;top: -2px;overflow:visible !important;display:block !important;position: relative;}
+#slider {margin:0 auto;}
+#slider .slider-contents {overflow:hidden;border:8px solid #DDDDDD;box-shadow:0 0 3px rgba(3,3,3,0.5);}
+#slider .slide-nav {float:left;padding: 0 8px;height: 26px;background: #3a3a3a;}
+#slider .slide-nav a {
+	width: 14px;
+	height: 14px;
+	text-indent: -999px;
+	float: left;
+	list-style: none;
+	display: block;
+	background: #dddddd;
+	margin: 5px 4px;
+	cursor: pointer;
+}
+#slider .progress-bar {width:0px;background-color:#AAAAAA;height:2px;top: -2px;overflow:visible !important;display:block !important;position: relative;}
+#slider .controls {height: 26px;margin: 4px auto 0;display: table;}
+#slider .pause-play-control {width: 46px;height: 26px;float: left;background: #3A3A3A;color: #fff;}
+#slider .pause-play-control a {width:9px;height: 19px;display:block;overflow:hidden;text-indent: -9999px;background:url('img/icons.png');cursor: pointer;margin:3px auto 0;}
+#slider .pause-play-control a.play-slide {background-position:-5px -3px;}
+#slider .pause-play-control a.pause-slide {background-position:-29px -3px;}
+#slider .slider-next,#slider .slider-prev {
+	width: 46px;
+	height: 46px;
+	background: #3a3a3a;
+	display: block;
+	font-size: 41px;
+	color: #FFF;
+	font-weight: bold;
+	text-align: center;
+	position: absolute;
+	cursor: pointer;
+	text-indent: -999px;
+	overflow: hidden;
+}
+#slider .slider-next:before,#slider .slider-prev:before {background: #3a3a3a url('img/icons.png');width:32px;height:32px;position:relative;top:7px;left:7px;content:'';display:block;}
+/*#slider .slider-next {margin: -220px 0 0 681px;}
+#slider .slider-prev {margin: -220px 0 0 4px;}*/
+#slider .slider-next:before {background-position:-5px -31px;}
+#slider .slider-prev:before {background-position:-5px -70px;}
