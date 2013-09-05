@@ -65,7 +65,7 @@
 		if(this.options.pages == true){
 	   		$element.find('.controls').append('<div class="slide-nav"></div>');
 	        for(var i = 0; i < totalSlides.length;i++){
-				$element.find('.slide-nav').append('<a>'+i+'</a>');
+				$element.find('.slide-nav').append('<a id="page_'+i+'" class="slide-page"">'+i+'</a>');
 			}
 		}
 		/* display page nav END */
@@ -224,10 +224,29 @@
 	Plugin.prototype._slideAnimation = function(slide_number,target_slide_element,animation_position,animation_type){
 		$element.find('.slide'+slide_number+' '+target_slide_element).removeClass().css('display','none').addClass(this.helperReplaceChar(target_slide_element));
 		slide_animation_timeout = setTimeout(function(){$element.find('.slide'+slide_number+' '+target_slide_element).addClass('animated '+animation_type).css('display','block');},(animation_position*1000));
+		this.setPageActive(slide_number-1);
+	}
+	
+	Plugin.prototype.setPageActive = function(page_number){
+		$element.find('.slide-page').each(function(){
+			jQuery(this).css('background','#DDD');
+		});
+		$element.find('#page_'+page_number).css('background','#888');
 	}
 	
 	Plugin.prototype.helperReplaceChar = function(string_data){
 		return string_data.replace(/.|#|h1|p||div|ul|li|ol|span/,' ');
+	}
+	
+	Plugin.prototype.idSplitter = function(cl_id){
+		var id_before = "",
+			id_split = "",
+			id_result = "";
+		
+		id_before = cl_id;
+		id_split = id_before.split("_");
+		id_result = id_split[id_split.length-1];
+		return id_result;
 	}
 	
 	Plugin.prototype.preloadImages = function(){
