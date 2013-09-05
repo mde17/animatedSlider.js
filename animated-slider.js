@@ -252,15 +252,16 @@
 	Plugin.prototype.preloadImages = function(){
 		var image_load_division = 100/totalImg;
 		$element.find('img').each(function(e){
-			$(this).on("load",function(){
-				if(totalImg == imgs){
-					that.startSlider();
+			if(totalImg == imgs){
+				jQuery(this).on("load",function(){
+				that.startSlider();
 					$element.find('.img-preloader').css('display','none');
-				}else{
-					imgs++;
-					$element.find('.img-preloader').animate({width:+image_load_division*imgs},500);
-				}
-			});
+				});	
+			}else{
+				imgs++;
+				$element.find('.img-preloader').animate({width:'+='+(image_load_division*imgs)},500);
+			}
+			
 		});
 
 	}
