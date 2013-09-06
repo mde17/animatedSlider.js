@@ -250,19 +250,29 @@
 	}
 	
 	Plugin.prototype.preloadImages = function(){
+		console.log(totalImg);
 		var image_load_division = 100/totalImg;
-		$element.find('img').each(function(e){
-			if(totalImg == imgs){
-				jQuery(this).on("load",function(){
+		if(totalImg <= 0){
+			$element.find('.img-preloader').css('width','100px');
+			jQuery(window).on("load",function(){
 				that.startSlider();
-					$element.find('.img-preloader').css('display','none');
-				});	
-			}else{
-				imgs++;
-				$element.find('.img-preloader').animate({width:'+='+(image_load_division*imgs)},500);
-			}
-			
-		});
+				$element.find('.img-preloader').css('display','none'); });
+		}else{
+			$element.find('img').each(function(e){
+				if(totalImg == imgs || totalImg == 1){
+						$element.find('.img-preloader').css('width','100px');
+						jQuery(window).on("load",function(){
+						that.startSlider();
+						$element.find('.img-preloader').css('display','none');
+					});	
+				}
+				else{
+					imgs++;
+					$element.find('.img-preloader').animate({width:'+='+(image_load_division*imgs)},500);
+				}
+				
+			});//each END	
+		}
 
 	}
 
