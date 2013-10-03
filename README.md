@@ -61,5 +61,11 @@ it uses the animate.css from Dan Eden -> http://daneden.me/animate/ </p>
 			<td>enables and displays slide previous and next button if set to true</td>
 			<td>true</td>
 		</tr>
+		<tr>
+			<td>slide_animation_data</td>
+			<td>Array</td>
+			<td>the heart of your animation goes here</td>
+			<td>none</td>
+		</tr>
 	</tbody>
 </table>
