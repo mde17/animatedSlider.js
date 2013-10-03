@@ -47,7 +47,7 @@
 		/* adds slides wrapper BEGIN */
 		$element.html( function() {
             return '<div class="slider-contents">'+$element.html()+'</div><div class="controls"></div>';
-        }).css({'width': that.options.width+130});
+        }).css({'width': that.options.width+56});
         /* adds slides wrapper END */
         
         /* adds a preloader progress bar BEGIN */
@@ -79,8 +79,8 @@
 		/* display slider pages if slides are more than 1 BEGIN */
 		if(totalSlides.length > 1 && this.options.controls === true ){
 			$element.append('<div class="slider-controller"><a class="slider-prev"><</a><a class="slider-next">></a></div>');
-			$element.find('.slider-next').css({'margin-top':(((this.options.height-(this.options.height-46)/2))+38)*-1,'margin-left':this.options.width+130-46});
-			$element.find('.slider-prev').css({'margin-top':(((this.options.height-(this.options.height-46)/2))+38)*-1});
+			$element.find('.slider-next').css({'margin-top':(((this.options.height-(this.options.height-44)/2))+38)*-1,'margin-left':this.options.width+28});
+			$element.find('.slider-prev').css({'margin-top':(((this.options.height-(this.options.height-44)/2))+38)*-1});
 		}
 		/* display slider pages if slides are more than 1 END */
 		
@@ -222,16 +222,22 @@
     }
 
 	Plugin.prototype._slideAnimation = function(slide_number,target_slide_element,animation_position,animation_type){
-		$element.find('.slide'+slide_number+' '+target_slide_element).removeClass().css('display','none').addClass(this.helperReplaceChar(target_slide_element));
-		slide_animation_timeout = setTimeout(function(){$element.find('.slide'+slide_number+' '+target_slide_element).addClass('animated '+animation_type).css('display','block');},(animation_position*1000));
+		var cur_class = jQuery(target_slide_element).attr('class');
+		
+		$element.find('.slide'+slide_number+' '+target_slide_element).removeClass('animated '+animation_type).css('visibility','hidden');
+		slide_animation_timeout = setTimeout(
+			function(){
+				$element.find('.slide'+slide_number+' '+target_slide_element).addClass('animated '+animation_type).css('visibility','visible');
+				},
+			(animation_position*1000));
 		this.setPageActive(slide_number-1);
 	}
 	
 	Plugin.prototype.setPageActive = function(page_number){
 		$element.find('.slide-page').each(function(){
-			jQuery(this).css('background','#DDD');
+			jQuery(this).css('background-position','217px 150px');
 		});
-		$element.find('#page_'+page_number).css('background','#888');
+		$element.find('#page_'+page_number).css('background-position','178px 150px');
 	}
 	
 	Plugin.prototype.helperReplaceChar = function(string_data){

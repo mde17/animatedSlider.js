@@ -2,86 +2,95 @@
 <html>
     <head>
         <title>Content-slider</title>
-        <link rel="stylesheet" href="animate.css" type="text/css">
+        <link rel="stylesheet" href="http://daneden.me/animate/animate.css" type="text/css">
         <link rel="stylesheet" href="animated-slider.css" type="text/css">
         <link rel="stylesheet" href="main.css" type="text/css">
-        <script src="jquery-1.10.2.min.js"></script>
-        <script src="modernizr.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="animated-slider.js"></script>
         <script>
+        /*
+         * 
+         * 
+         */
         	jQuery(document).ready(function(){
-			jQuery('.slider').animatedSlider({
-				'width':600,
-				'height':300,
-				'slide_interval':5000,
+			jQuery('#slider').animatedSlider({
 				'loader':true,
+				'width':900,
+				'height':300,
+				'slide_interval':6000,
 				'slide_animation_data' : 
 					[//slides
-						[{
-							'target_slide_element':'.img-logo',
-							'animation_position':0,
-			            	'animation_type':'bounceInUp'
+						//slide1 BEGIN
+						[
+							{
+							'target_element':'.powered-by',
+							'animation_frame':0,
+			            	'animation_type':'bounceInDown'
 							},
-						{
-							'target_slide_element':'.img-mobile',
-							'animation_position':0.5,
-			            	'animation_type':'bounceInUp'
+							{
+							'target_element':'.jquery-logo',
+							'animation_frame':0.8,
+			            	'animation_type':'flip'
 							},
-						{
-							'target_slide_element':'.img-tablet',
-							'animation_position':1,
-			            	'animation_type':'bounceInUp'
+							{
+							'target_element':'.css3-logo',
+							'animation_frame':1.3,
+			            	'animation_type':'flip'
 							},
-						{
-							'target_slide_element':'.img-laptop',
-							'animation_position':1.5,
-			            	'animation_type':'bounceInUp'
-							}],//slide1
-					 	
-					 	[{
-							'target_slide_element':'h1',
-							'animation_position':0,
-			            	'animation_type':'bounceInUp'
+							{
+							'target_element':'.easy',
+							'animation_frame':2,
+			            	'animation_type':'swing'
 							},
-						{
-							'target_slide_element':'p',
-							'animation_position':0.5,
-			            	'animation_type':'bounceInUp'
-							}],//slide2
-							
-					 	[{
-							'target_slide_element':'h1',
-							'animation_position':0,
-			            	'animation_type':'bounceInUp'
+							{
+							'target_element':'.free',
+							'animation_frame':2.3,
+			            	'animation_type':'swing'
 							},
-						{
-							'target_slide_element':'p',
-							'animation_position':0.5,
-			            	'animation_type':'bounceInUp'
+							{
+							'target_element':'.cool',
+							'animation_frame':2.7,
+			            	'animation_type':'swing'
+							},
+							{
+							'target_element':'.shine',
+							'animation_frame':3,
+			            	'animation_type':'fadeIn'
+							},
+							{
+							'target_element':'.bubble1',
+							'animation_frame':3.3,
+			            	'animation_type':'fadeInLeft'
+							},
+							{
+							'target_element':'.bubble2',
+							'animation_frame':3.5,
+			            	'animation_type':'fadeInRight'
 							}
-					 	]//slide3
+						]
 					]
 				
 			});
+			
 		});
         </script>
+        <link href='http://fonts.googleapis.com/css?family=Kavoon' rel='stylesheet' type='text/css'>
     </head>
     <body>
-        <div class="slider">
-            <div class="slide1">
-            	<img src="img/logo.png" class="img-logo"/>
-                <img src="img/mobile.png" class="img-mobile"/>
-                <img src="img/tablet.png" class="img-tablet"/>
-                <img src="img/laptop.png" class="img-laptop"/>
-            </div>
-            <div class="slide2">
-                <h1>Slide2</h1>
-                <p>content 2</p>
-            </div>
-            <div class="slide3">
-                <h1>Slide3</h1>
-                <p>content 3</p>
-            </div>
-        </div>
+    	<div class="banner-bg">
+	        <div id="slider">
+	            <div class="slide1">
+	            	<img class="shine" src="http://imageshack.us/a/img593/563/owtc.png" />
+	            	<div class="bubble bubble1"> </div>
+	            	<div class="bubble bubble2"> </div>
+	            	<h2 class="powered-by">Powered By:</h2>
+	            	<img class="jquery-logo" src="img/jquery.png" />
+	            	<img class="css3-logo" src="img/css3.png" />
+	            	<h2 class="text-style1 easy">Easy To Use</h2>
+	            	<h2 class="text-style1 free">Free</h2>
+	            	<h2 class="text-style1 cool">So Cool!</h2>
+	            </div>
+	        </div>
+       </div> 
     </body>
 </html>

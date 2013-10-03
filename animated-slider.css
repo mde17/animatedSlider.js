@@ -16,42 +16,115 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
+#slider {
+	font-family: "Kavoon";
+}
 #slider {margin:0 auto;}
-#slider .slider-contents {overflow:hidden;border:8px solid #DDDDDD;box-shadow:0 0 3px rgba(3,3,3,0.5);}
-#slider .slide-nav {float:left;padding: 0 8px;height: 26px;background: #3a3a3a;}
+#slider .slider-contents {overflow:hidden;}
+#slider .slide-nav {float:left;padding: 0 8px;height: 26px;}
 #slider .slide-nav a {
-	width: 14px;
-	height: 14px;
+	width: 19px;
+	height: 19px;
 	text-indent: -999px;
 	float: left;
 	list-style: none;
 	display: block;
-	background: #dddddd;
 	margin: 5px 4px;
 	cursor: pointer;
+	background: url(img/icons.png);
+	background-position: 217px 150px;
+	-webkit-transition: all 0.2s ease-in;
+	}
+#slider .slide-nav a:hover {
+	background-position: 178px 150px !important;
 }
 #slider .progress-bar {width:0px;background-color:#AAAAAA;height:2px;top: -2px;overflow:visible !important;display:block !important;position: relative;}
 #slider .controls {height: 26px;margin: 4px auto 0;display: table;}
-#slider .pause-play-control {width: 46px;height: 26px;float: left;background: #3A3A3A;color: #fff;}
-#slider .pause-play-control a {width:9px;height: 19px;display:block;overflow:hidden;text-indent: -9999px;background:url('img/icons.png');cursor: pointer;margin:3px auto 0;}
-#slider .pause-play-control a.play-slide {background-position:-5px -3px;}
-#slider .pause-play-control a.pause-slide {background-position:-29px -3px;}
-#slider .slider-next,#slider .slider-prev {
-	width: 46px;
-	height: 46px;
-	background: #3a3a3a;
+#slider .pause-play-control {width: 46px;height: 26px;float: left;}
+#slider .pause-play-control a {
+	width: 17px;
+	height: 20px;
 	display: block;
-	font-size: 41px;
-	color: #FFF;
-	font-weight: bold;
-	text-align: center;
+	overflow: hidden;
+	text-indent: -9999px;
+	background: url('img/icons.png');
+	cursor: pointer;
+	margin: 3px auto 0;
+	}
+#slider .pause-play-control a.play-slide {background-position:-126px -12px;}
+#slider .pause-play-control a.pause-slide {background-position:-154px -12px;}
+#slider .pause-play-control a.play-slide:hover {background-position:-126px -50px;}
+#slider .pause-play-control a.pause-slide:hover {background-position:-154px -50px;}
+#slider .slider-next,#slider .slider-prev {
+	width: 28px;
+	height: 44px;
+	display: block;
 	position: absolute;
 	cursor: pointer;
 	text-indent: -999px;
 	overflow: hidden;
 }
-#slider .slider-next:before,#slider .slider-prev:before {background: #3a3a3a url('img/icons.png');width:32px;height:32px;position:relative;top:7px;left:7px;content:'';display:block;}
+#slider .slider-next:before,#slider .slider-prev:before {
+	background: url('img/icons.png');
+	width: 28px;
+	height: 44px;
+	position: relative;
+	content: '';
+	display: block;
+}
 /*#slider .slider-next {margin: -220px 0 0 681px;}
 #slider .slider-prev {margin: -220px 0 0 4px;}*/
-#slider .slider-next:before {background-position:-5px -31px;}
-#slider .slider-prev:before {background-position:-5px -70px;}
+#slider .slider-next:before {background-position:-60px -50px;}
+#slider .slider-prev:before {background-position:-11px -50px;}
+#slider .slider-next:hover:before {background-position:-60px -107px;}
+#slider .slider-prev:hover:before {background-position:-11px -107px;}
+.bubble {
+	width:425px;
+	height: 280px;
+	background-image: url('img/bubble.png');
+	overflow:hidden;
+}
+.bubble1 {
+	position: absolute;
+	margin-top: -280px;
+}
+.bubble2 {
+	position: absolute;
+	background-position-x: 425px;
+	margin: -304px 0 0 425px;
+}
+.powered-by {
+	position: absolute;
+	font-size: 2em;
+	color: #FCF200;
+	margin-top: -300px;
+}
+.jquery-logo {
+	position: absolute;
+	margin-top: -193px;
+}
+.css3-logo {
+	position: absolute;
+	margin: -273px 0 0 354px;
+}
+.text-style1 {
+	font-size: 2em;
+	color: #E09100;
+	text-shadow: 2px 2px 0 #FFF, -2px -2px 0 #FFF,2px -2px 0 #FFF,-2px 2px 0 #FFF;
+}
+.easy {
+	position: absolute;
+	margin: -230px 0 0 600px;	
+}
+.free {
+	position: absolute;
+	margin: -173px 600px;
+}
+.cool {
+	position: absolute;
+	margin: -100px 0 0 600px;
+}
+.shine {
+	margin: 0 auto;
+	display:block;
+}
