@@ -154,19 +154,32 @@ slide_animation_data: [[slide1{options}],[slide2{options}],[slide3{options}]];
 
 <h3>On your HTML</h3>
 <p> you can use any name for your slider container but you have to specify a class of "slide[slide#]" for ever slide</p>
-<pre>
-<div id="slider">
-            <div class="slide1">
-            	<h2 class="txt1">Bring Life Back </h2>
-            	<h2 class="txt2">to Your Banners </h2>
-            </div>
-            <div class="slide2">
-                <p>asdasd</p>
-            </div>
-            <div class="slide3">
-                <h1>Slide3</h1>
-                <p>content 3</p>
-            </div>
-        </div>
+<pre id="preid">
+	 &lt;div id="slider"&gt;
+            &lt;div class="slide1"&gt;
+            	&lt;h2 class="txt1"&gt;Bring Life Back &lt;/h2&gt;
+            	&lt;h2 class="txt2"&gt;to Your Banners &lt;/h2&gt;
+            &lt;/div&gt;
+            &lt;div class="slide2"&gt;
+                &lt;p>asdasd&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="slide3"&gt;
+                &lt;h1>Slide3&lt;/h1&gt;
+                &lt;p>content 3&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
 </pre>
+<script>
+String.prototype.escapeHTML = function () {                                        
+  return(                                                                 
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var codeEl = document.getElementById('preid');
+if (codeEl) {
+  codeEl.innerHTML = codeEl.innerHTML.escapeHTML();
+}
+</script>
 
