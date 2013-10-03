@@ -152,4 +152,21 @@ slide_animation_data: [[slide1{options}],[slide2{options}],[slide3{options}]];
 			});
 </pre>
 
+<h3>On your HTML</h3>
+<p> you can use any name for your slider container but you have to specify a class of "slide[slide#]" for ever slide</p>
+<pre>
+<div id="slider">
+            <div class="slide1">
+            	<h2 class="txt1">Bring Life Back </h2>
+            	<h2 class="txt2">to Your Banners </h2>
+            </div>
+            <div class="slide2">
+                <p>asdasd</p>
+            </div>
+            <div class="slide3">
+                <h1>Slide3</h1>
+                <p>content 3</p>
+            </div>
+        </div>
+</pre>
 
