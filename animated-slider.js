@@ -8,7 +8,8 @@
             'loader':true,
             'pages':true,
             'pause':true,
-            'controls':true
+            'controls':true,
+            'slide_animation_data':function(){}
         },
         $element,
         totalSlides,
@@ -159,9 +160,9 @@
     	for(var i =0;i<that.options.slide_animation_data[curSlide].length;i++){
 								that._slideAnimation(
 									curSlide+1,
-									that.options.slide_animation_data[curSlide][i].target_element,
-									that.options.slide_animation_data[curSlide][i].animation_frame,
-									that.options.slide_animation_data[curSlide][i].animation_type
+									that.options.slide_animation_data[curSlide][i][0],
+									that.options.slide_animation_data[curSlide][i][1],
+									that.options.slide_animation_data[curSlide][i][2]
 								);
 				}//for loop END
 				$element.find('.slider-contents').children('div').css('display','none');
