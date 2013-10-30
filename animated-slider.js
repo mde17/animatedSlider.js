@@ -9,7 +9,7 @@
             'pages':true,
             'pause':true,
             'controls':true,
-            'slide_animation_data':function(){}
+            'slide_animation_data':[]
         },
         $element,
         totalSlides,
@@ -223,14 +223,21 @@
     }
 
 	Plugin.prototype._slideAnimation = function(slide_number,target_slide_element,animation_position,animation_type){
-		var cur_class = jQuery(target_slide_element).attr('class');
+		/*var cur_class = jQuery(target_slide_element).attr('class');
 		
 		$element.find('.slide'+slide_number+' '+target_slide_element).removeClass('animated '+animation_type).css('visibility','hidden');
 		slide_animation_timeout = setTimeout(
 			function(){
 				$element.find('.slide'+slide_number+' '+target_slide_element).addClass('animated '+animation_type).css('visibility','visible');
 				},
+			(animation_position*1000));*/
+		
+		slide_animation_timeout = setTimeout(
+			function(){
+				that.tween('.slide'+slide_number+' '+target_slide_element,animation_type);
+				},
 			(animation_position*1000));
+		
 		this.setPageActive(slide_number-1);
 	}
 	
@@ -257,7 +264,6 @@
 	}
 	
 	Plugin.prototype.preloadImages = function(){
-		console.log(totalImg);
 		var image_load_division = 100/totalImg;
 		if(totalImg <= 0){
 			$element.find('.img-preloader').css('width','100px');
@@ -282,6 +288,251 @@
 		}
 
 	}
+	
+	Plugin.prototype.tween = function(target,atype){
+					var thatTween = this;
+					
+					
+					this.fadeIn = function(){
+						TweenMax.fromTo(target,1.5,{'opacity':'0',ease:Quad.easeOut},{'opacity':'1',ease:Quad.easeOut});
+					}
+					
+					this.fadeInUp = function(){
+						var tl = new TimelineMax();
+						tl.from(target,1,{'opacity':'0',top:'+=50'}).
+						to(target,1,{'opacity':'1',top:'+=0',ease:Quad.easeOut});
+					}
+					
+					this.fadeInDown = function(){
+						var tl = new TimelineMax();
+						tl.from(target,1,{'opacity':'0',top:'-=50'}).
+						to(target,1,{'opacity':'1',top:'+=0',ease:Quad.easeOut});
+					}
+					
+					this.fadeInRight = function(){
+						var tl = new TimelineMax();
+						tl.from(target,1,{'opacity':'0',left:'+=50'}).
+						to(target,1,{'opacity':'1',left:'+=0',ease:Quad.easeOut});
+					}
+					
+					this.fadeInLeft = function(){
+						var tl = new TimelineMax();
+						tl.from(target,1,{'opacity':'0',left:'-=50'}).
+						to(target,1,{'opacity':'1',left:'+=0',ease:Quad.easeOut});
+					}
+					
+					this.fadeOut = function(){
+						TweenMax.fromTo(target,1.5,{'opacity':'1',ease:Quad.easeOut},{'opacity':'0',ease:Quad.easeOut});
+					}
+					
+					this.fadeOutUp = function(){
+						var tl = new TimelineMax();
+						tl.from(target,0,{'opacity':'1',top:'+=0'}).
+						to(target,1,{'opacity':'0',top:'-=50',ease:Quad.easeOut}).
+						to(target,0,{'opacity':'0',top:'+=50'});
+					}
+					
+					this.fadeOutDown = function(){
+						var tl = new TimelineMax();
+						tl.from(target,0,{'opacity':'1',top:'+=0'}).
+						to(target,1,{'opacity':'0',top:'+=50',ease:Quad.easeOut}).
+						to(target,0,{'opacity':'0',top:'-=50'});
+					}
+					
+					this.fadeOutRight = function(){
+						var tl = new TimelineMax();
+						tl.from(target,0,{'opacity':'1',left:'+=0'}).
+						to(target,1,{'opacity':'0',left:'-=50',ease:Quad.easeOut}).
+						to(target,0,{'opacity':'0',left:'+=50'});
+					}
+					
+					this.fadeOutLeft = function(){
+						var tl = new TimelineMax();
+						tl.from(target,0,{'opacity':'1',left:'+=0'}).
+						to(target,1,{'opacity':'0',left:'+=50',ease:Quad.easeOut}).
+						to(target,0,{'opacity':'0',left:'-=50'});
+					}
+					
+					this.bounceIn = function(){
+						TweenMax.fromTo(target,1,{'opacity':'0',scale:0},{'opacity':'1',scale:1,ease:Bounce.easeOut});
+					}
+					
+					this.rotateIn = function(){
+						TweenMax.fromTo(target,1,{'opacity':'1',rotation:0},{'opacity':'1',rotation:'360',ease:Quad.easeOut});
+					}
+					
+					this.flip = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{'opacity':'1',rotationX:0,rotationY:0,z:0,transformOrigin:'center'}).
+						to(target,0.5,{rotationY:170,z:150,scale:2}).
+						to(target,0.5,{rotationY:10,scale:1,ease:Bounce.easeOut}).
+						to(target,0.5,{rotationY:0,scale:1,ease:Quad.easeIn});
+					}
+					
+					this.flipInX = function(){
+						var tl = new TimelineMax();
+						
+						tl.to(target,0.2,{opacity:0,rotationX:+90,perspective:400}).
+						to(target,0.2,{opacity:1,rotationX:-10}).
+						to(target,0.2,{rotationX:+10}).
+						to(target,0.5,{rotationX:0,ease:Quad.easeOut});
+					}
+					
+					this.flipInY = function(){
+						var tl = new TimelineMax();
+						
+						tl.to(target,0.2,{opacity:0,rotationY:+90,perspective:400}).
+						to(target,0.2,{opacity:1,rotationY:-10}).
+						to(target,0.2,{rotationY:+10}).
+						to(target,0.5,{rotationY:0,ease:Quad.easeOut});
+					}
+					
+					this.flipOutY = function(){
+						var tl = new TimelineMax();
+						
+						tl.to(target,0,{opacity:1,rotationY:0,perspective:400}).
+						to(target,0.5,{opacity:0,rotationY:+90}).
+						to(target,0.5,{opacity:0,rotationY:0,ease:Quad.easeOut});
+					}
+					
+					this.flipOutX = function(){
+						var tl = new TimelineMax();
+						
+						tl.to(target,0,{opacity:1,rotationX:0,perspective:400}).
+						to(target,0.5,{opacity:0,rotationX:+90}).
+						to(target,0.5,{opacity:0,rotationX:0,ease:Quad.easeOut});
+					}
+					
+					this.swing = function(){
+						var tl = new TimelineMax();
+						tl.from(target,0,{opacity:1,rotation:'0', transformOrigin:'center'}).
+						to(target,0.1,{opacity:1,rotation:'15'}).
+						to(target,0.2,{opacity:1,rotation:'-10'}).
+						to(target,0.3,{opacity:1,rotation:'5'}).
+						to(target,0.4,{opacity:1,rotation:'-5'}).
+						to(target,0.5,{opacity:1,rotation:'0'});
+					}
+					
+					this.wobble = function(){
+						var tl = new TimelineMax();
+						var elem = jQuery(target).width();
+						tl.from(target,0.15,{rotation:'0', left:'+='+(elem*0)}).
+						to(target,0.15,{rotation:'-7', left:'-='+(elem*0.30)}).
+						to(target,0.15,{rotation:'5', left:'+='+(elem*0.30)}).
+						to(target,0.15,{rotation:'-5', left:'-='+(elem*0.25)}).
+						to(target,0.15,{rotation:'3', left:'+='+(elem*0.25)}).
+						to(target,0.15,{rotation:'-3', left:'-='+(elem*0.15)}).
+						to(target,0.15,{rotation:'0', left:'+='+(elem*0.15)});
+					}
+					
+					this.shake = function(){
+						var tl = new TimelineMax();
+						var elem = jQuery(target).width();
+						tl.from(target,0,{ left:'+='+(elem*0)}).
+						to(target,0.1,{ left:'-='+(elem*0.20)}).
+						to(target,0.1,{ left:'+='+(elem*0.20)}).
+						to(target,0.1,{ left:'-='+(elem*0.15)}).
+						to(target,0.1,{ left:'+='+(elem*0.15)}).
+						to(target,0.1,{ left:'-='+(elem*0.10)}).
+						to(target,0.1,{ left:'+='+(elem*0.10)}).
+						to(target,0.1,{ left:'-='+(elem*0.10)}).
+						to(target,0.1,{ left:'+='+(elem*0.10)});
+					}
+					
+					this.bounce = function(){
+						var tl = new TimelineMax();
+						var elem = jQuery(target).width();
+						tl.from(target,0.2,{ top:'+='+(elem*0),ease:Quad.easeInOut}).
+						to(target,0.2,{ top:'-='+(elem*0.30),ease:Quad.easeInOut}).
+						to(target,0.15,{ top:'+='+(elem*0.30)}).
+						to(target,0.1,{ top:'-='+(elem*0.10)}).
+						to(target,0.1,{ top:'+='+(elem*0.10)});
+					}
+					
+					this.flash = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0.2,{opacity:0}).
+						to(target,0.2,{opacity:1}).
+						to(target,0.2,{opacity:0}).
+						to(target,0.5,{opacity:1});
+					}
+					
+					this.tada = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0.2,{scale:0.9,rotation:3}).
+						to(target,0.1,{scale:1.1,rotation:-3}).
+						to(target,0.1,{scale:1.1,rotation:3}).
+						to(target,0.1,{scale:1.1,rotation:-3}).
+						to(target,0.1,{scale:1.1,rotation:3}).
+						to(target,0.1,{scale:1.1,rotation:-3}).
+						to(target,0.1,{scale:1.1,rotation:3}).
+						to(target,0.1,{scale:1,rotation:0});
+					}
+					
+					this.pulse = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0.5,{scale:1.1}).
+						to(target,0.5,{scale:1});
+					}
+					
+					this.rotateInDownLeft = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{opacity:0,rotation:-90,transformOrigin:'bottom left'}).
+						to(target,0.2,{opacity:0}).
+						to(target,0.8,{opacity:1,rotation:0,ease:Ease.easeOut});
+					}
+					
+					this.rotateOutDownLeft = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{opacity:1,rotation:0,transformOrigin:'bottom left'}).
+						to(target,0.2,{opacity:1}).
+						to(target,0.8,{opacity:0,rotation:90,ease:Ease.easeOut});
+					}
+					
+					this.rotateInDownRight = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{opacity:0,rotation:90,transformOrigin:'bottom right'}).
+						to(target,0.2,{opacity:0}).
+						to(target,0.8,{opacity:1,rotation:0,ease:Ease.easeOut});
+					}
+					
+					this.rotateOutDownRight = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{opacity:1,rotation:0,transformOrigin:'bottom right'}).
+						to(target,0.2,{opacity:1}).
+						to(target,0.8,{opacity:0,rotation:-90,ease:Ease.easeOut});
+					}
+					
+					this.rotateInUpLeft = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{opacity:0,rotation:90,transformOrigin:'top left'}).
+						to(target,0.2,{opacity:0}).
+						to(target,0.8,{opacity:1,rotation:0,ease:Ease.easeOut});
+					}
+					
+					this.rotateOutUpLeft = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{opacity:1,rotation:0,transformOrigin:'top left'}).
+						to(target,0.2,{opacity:1}).
+						to(target,0.8,{opacity:0,rotation:-90,ease:Ease.easeOut});
+					}
+					
+					this.rotateInUpRight = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{opacity:0,rotation:-90,transformOrigin:'top right'}).
+						to(target,0.2,{opacity:0}).
+						to(target,0.8,{opacity:1,rotation:0,ease:Ease.easeOut});
+					}
+					
+					this.rotateOutUpRight = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{opacity:1,rotation:0,transformOrigin:'top right'}).
+						to(target,0.2,{opacity:1}).
+						to(target,0.8,{opacity:0,rotation:90,ease:Ease.easeOut});
+					}
+					
+					thatTween[atype].call(thatTween.tween,null);
+				}
 
     $.fn[pluginName] = function ( options ) {
         return this.each(function () {
