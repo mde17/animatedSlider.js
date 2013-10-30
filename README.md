@@ -1,7 +1,7 @@
 animated-content-slider
 =======================
 <p>a jQuery plug-in that adds animation to contentsliders/banners/etc
-it uses the animate.css from Dan Eden -> http://daneden.me/animate/ </p>
+<p>Compatible with all major browsers: ie8+,Chrome,Safari,Firefox,Opera</p>
 
 <a target="_blank" href="http://cdpn.io/BxnhF">View it on CodePen</a>
 
@@ -117,7 +117,7 @@ slide_animation_data:
 		<tr>
 			<td>third element (animation type)</td>
 			<td>String</td>
-			<td>What type of animation to execute, please refer to <a href="http://daneden.me/animate/">Animated</a> for the list of animations</td>
+			<td>What type of animation to execute, please refer at the last part at the bottom for the list of animations</td>
 		</tr>
 	</tbody>
 </table>
@@ -182,3 +182,43 @@ if (codeEl) {
 }
 </script>
 
+<h2>Dependencies (CDN)</h2>
+<p>jQuery</p>
+"https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
+<p>GSAP</p>
+"http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"
+"http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineMax.min.js"
+
+<h2>Animation Types</h2>
+	 rotateOutDownLeft
+	 rotateOutDownRight
+	 rotateOutUpLeft
+	 rotateOutUpRight
+	 rotateInUpRight
+	 rotateInUpLeft
+	 rotateInDownRight
+	 rotateInDownLeft
+	 flipOutX
+	 flipOutY
+	 flipInY
+	 flipInX
+	 fadeIn
+	 fadeInUp
+	 fadeInLeft
+	 fadeInRight
+	 fadeInDown
+	 fadeOut
+	 fadeOutUp
+	 fadeOutLeft
+	 fadeOutRight
+	 fadeOutDown
+	 bounceIn
+	 rotateIn
+	 flip
+	 swing
+	 wobble
+	 shake
+	 bounce
+	 flash
+	 tada
+	 pulse
