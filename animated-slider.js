@@ -54,7 +54,7 @@
         /* adds a preloader progress bar BEGIN */
         $element.append('<div class="img-preloader" style="position:absolute;height:5px;background-color:#aeaeae;display:block;margin-top:'+
         ((((this.options.height-(this.options.height-5)/2))+38)*-(1))+'px;margin-left:'+
-        (((this.options.width+130)/2)-50)+'px;"></div>');
+        (((this.options.width)/2)-25)+'px;"></div>');
         /* adds a preloader progress bar END */
         
 		/*add class and styles to slider and slides BEGIN */
@@ -231,7 +231,7 @@
 				$element.find('.slide'+slide_number+' '+target_slide_element).addClass('animated '+animation_type).css('visibility','visible');
 				},
 			(animation_position*1000));*/
-		
+		$element.find('.slide'+slide_number+' '+target_slide_element).css('opacity','0');
 		slide_animation_timeout = setTimeout(
 			function(){
 				that.tween('.slide'+slide_number+' '+target_slide_element,animation_type);
@@ -299,26 +299,26 @@
 					
 					this.fadeInUp = function(){
 						var tl = new TimelineMax();
-						tl.from(target,1,{'opacity':'0',top:'+=50'}).
-						to(target,1,{'opacity':'1',top:'+=0',ease:Quad.easeOut});
+						tl.to(target,0,{'opacity':'0',top:'+=50'}).
+						to(target,1,{'opacity':'1',top:'-=50',ease:Quad.easeOut});
 					}
 					
 					this.fadeInDown = function(){
 						var tl = new TimelineMax();
-						tl.from(target,1,{'opacity':'0',top:'-=50'}).
-						to(target,1,{'opacity':'1',top:'+=0',ease:Quad.easeOut});
+						tl.to(target,0,{'opacity':'0',top:'-=50'}).
+						to(target,1,{'opacity':'1',top:'+=50',ease:Quad.easeOut});
 					}
 					
 					this.fadeInRight = function(){
 						var tl = new TimelineMax();
-						tl.from(target,1,{'opacity':'0',left:'+=50'}).
-						to(target,1,{'opacity':'1',left:'+=0',ease:Quad.easeOut});
+						tl.to(target,0,{'opacity':'0',left:'+=50'}).
+						to(target,1,{'opacity':'1',left:'-=50',ease:Quad.easeOut});
 					}
 					
 					this.fadeInLeft = function(){
 						var tl = new TimelineMax();
-						tl.from(target,1,{'opacity':'0',left:'-=50'}).
-						to(target,1,{'opacity':'1',left:'+=0',ease:Quad.easeOut});
+						tl.to(target,0,{'opacity':'0',left:'-=50'}).
+						to(target,1,{'opacity':'1',left:'+=50',ease:Quad.easeOut});
 					}
 					
 					this.fadeOut = function(){
@@ -353,17 +353,97 @@
 						to(target,0,{'opacity':'0',left:'-=50'});
 					}
 					
+					this.bounceInFront = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{'opacity':'0',scale:1.3}).
+						to(target,0.2,{'opacity':'0',scale:1.3}).
+						to(target,0.3,{'opacity':'1',scale:0.9}).
+						to(target,0.2,{'opacity':'1',scale:1.05}).
+						to(target,0.2,{'opacity':'1',scale:1});
+					}
+					
 					this.bounceIn = function(){
 						TweenMax.fromTo(target,1,{'opacity':'0',scale:0},{'opacity':'1',scale:1,ease:Bounce.easeOut});
 					}
 					
+					this.bounceInUp = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{'opacity':'0',top:'+=500'}).
+						to(target,0.4,{'opacity':'1',top:'-=530'}).
+						to(target,0.2,{'opacity':'1',top:'+=40'}).
+						to(target,0.2,{'opacity':'1',top:'-=10'});
+					}
+					
+					this.bounceInDown = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{'opacity':'0',top:'-=500'}).
+						to(target,0.4,{'opacity':'1',top:'+=530'}).
+						to(target,0.2,{'opacity':'1',top:'-=40'}).
+						to(target,0.2,{'opacity':'1',top:'+=10'});
+					}
+					
+					this.bounceInLeft = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{'opacity':'0',left:'-=900'}).
+						to(target,0.4,{'opacity':'1',left:'+=930'}).
+						to(target,0.2,{'opacity':'1',left:'-=40'}).
+						to(target,0.2,{'opacity':'1',left:'+=10'});
+					}
+					
+					this.bounceInRight = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0,{'opacity':'0',left:'+=900'}).
+						to(target,0.4,{'opacity':'1',left:'-=930'}).
+						to(target,0.2,{'opacity':'1',left:'+=40'}).
+						to(target,0.2,{'opacity':'1',left:'-=10'});
+					}
+					
+					this.bounceOut = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0.2,{'opacity':'1',scale:0.9}).
+						to(target,0.4,{'opacity':'1',scale:1.1}).
+						to(target,0.3,{'opacity':'0',scale:0});
+					}
+					
+					this.bounceOutUp = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0.2,{'opacity':'1',top:'-=10'}).
+						to(target,0.2,{'opacity':'1',top:'+=40'}).
+						to(target,0.3,{'opacity':'1',top:'-=530'}).
+						to(target,0,{'opacity':'0',top:'+=500'});
+					}
+					
+					this.bounceOutDown = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0.2,{'opacity':'1',top:'+=10'}).
+						to(target,0.2,{'opacity':'1',top:'-=40'}).
+						to(target,0.3,{'opacity':'0',top:'+=530'}).
+						to(target,0,{'opacity':'0',top:'-=500'});
+					}
+					
+					this.bounceOutRight = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0.2,{'opacity':'1',left:'+=10'}).
+						to(target,0.2,{'opacity':'1',left:'-=40'}).
+						to(target,0.3,{'opacity':'0',left:'+=930'}).
+						to(target,0,{'opacity':'0',left:'-=900'});
+					}
+					
+					this.bounceOutLeft = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0.2,{'opacity':'1',left:'-=10'}).
+						to(target,0.2,{'opacity':'1',left:'+=40'}).
+						to(target,0.3,{'opacity':'0',left:'-=930'}).
+						to(target,0,{'opacity':'0',left:'+=900'});
+					}
+					
 					this.rotateIn = function(){
-						TweenMax.fromTo(target,1,{'opacity':'1',rotation:0},{'opacity':'1',rotation:'360',ease:Quad.easeOut});
+						TweenMax.fromTo(target,1,{'opacity':'0',rotation:0},{'opacity':'1',rotation:'360',ease:Quad.easeOut});
 					}
 					
 					this.flip = function(){
 						var tl = new TimelineMax();
-						tl.to(target,0,{'opacity':'1',rotationX:0,rotationY:0,z:0,transformOrigin:'center'}).
+						tl.to(target,0.5,{'opacity':'1',rotationX:0,rotationY:0,z:0,transformOrigin:'center'}).
 						to(target,0.5,{rotationY:170,z:150,scale:2}).
 						to(target,0.5,{rotationY:10,scale:1,ease:Bounce.easeOut}).
 						to(target,0.5,{rotationY:0,scale:1,ease:Quad.easeIn});
@@ -407,16 +487,16 @@
 						var tl = new TimelineMax();
 						tl.from(target,0,{opacity:1,rotation:'0', transformOrigin:'center'}).
 						to(target,0.1,{opacity:1,rotation:'15'}).
-						to(target,0.2,{opacity:1,rotation:'-10'}).
-						to(target,0.3,{opacity:1,rotation:'5'}).
-						to(target,0.4,{opacity:1,rotation:'-5'}).
-						to(target,0.5,{opacity:1,rotation:'0'});
+						to(target,0.2,{rotation:'-10'}).
+						to(target,0.3,{rotation:'5'}).
+						to(target,0.4,{rotation:'-5'}).
+						to(target,0.5,{rotation:'0'});
 					}
 					
 					this.wobble = function(){
 						var tl = new TimelineMax();
 						var elem = jQuery(target).width();
-						tl.from(target,0.15,{rotation:'0', left:'+='+(elem*0)}).
+						tl.from(target,0.15,{opacity:1,rotation:'0', left:'+='+(elem*0)}).
 						to(target,0.15,{rotation:'-7', left:'-='+(elem*0.30)}).
 						to(target,0.15,{rotation:'5', left:'+='+(elem*0.30)}).
 						to(target,0.15,{rotation:'-5', left:'-='+(elem*0.25)}).
@@ -428,7 +508,7 @@
 					this.shake = function(){
 						var tl = new TimelineMax();
 						var elem = jQuery(target).width();
-						tl.from(target,0,{ left:'+='+(elem*0)}).
+						tl.from(target,0,{opacity:1, left:'+='+(elem*0)}).
 						to(target,0.1,{ left:'-='+(elem*0.20)}).
 						to(target,0.1,{ left:'+='+(elem*0.20)}).
 						to(target,0.1,{ left:'-='+(elem*0.15)}).
@@ -442,7 +522,7 @@
 					this.bounce = function(){
 						var tl = new TimelineMax();
 						var elem = jQuery(target).width();
-						tl.from(target,0.2,{ top:'+='+(elem*0),ease:Quad.easeInOut}).
+						tl.from(target,0.2,{opacity:1, top:'+='+(elem*0),ease:Quad.easeInOut}).
 						to(target,0.2,{ top:'-='+(elem*0.30),ease:Quad.easeInOut}).
 						to(target,0.15,{ top:'+='+(elem*0.30)}).
 						to(target,0.1,{ top:'-='+(elem*0.10)}).
@@ -459,7 +539,7 @@
 					
 					this.tada = function(){
 						var tl = new TimelineMax();
-						tl.to(target,0.2,{scale:0.9,rotation:3}).
+						tl.to(target,0.2,{opacity:1,scale:0.9,rotation:3}).
 						to(target,0.1,{scale:1.1,rotation:-3}).
 						to(target,0.1,{scale:1.1,rotation:3}).
 						to(target,0.1,{scale:1.1,rotation:-3}).
@@ -471,7 +551,7 @@
 					
 					this.pulse = function(){
 						var tl = new TimelineMax();
-						tl.to(target,0.5,{scale:1.1}).
+						tl.to(target,0.5,{opacity:1,scale:1.1}).
 						to(target,0.5,{scale:1});
 					}
 					
@@ -486,7 +566,8 @@
 						var tl = new TimelineMax();
 						tl.to(target,0,{opacity:1,rotation:0,transformOrigin:'bottom left'}).
 						to(target,0.2,{opacity:1}).
-						to(target,0.8,{opacity:0,rotation:90,ease:Ease.easeOut});
+						to(target,0.8,{opacity:0,rotation:90,ease:Ease.easeOut}).
+						to(target,0,{rotation:0});
 					}
 					
 					this.rotateInDownRight = function(){
@@ -500,7 +581,8 @@
 						var tl = new TimelineMax();
 						tl.to(target,0,{opacity:1,rotation:0,transformOrigin:'bottom right'}).
 						to(target,0.2,{opacity:1}).
-						to(target,0.8,{opacity:0,rotation:-90,ease:Ease.easeOut});
+						to(target,0.8,{opacity:0,rotation:-90,ease:Ease.easeOut}).
+						to(target,0,{rotation:0});
 					}
 					
 					this.rotateInUpLeft = function(){
@@ -514,7 +596,8 @@
 						var tl = new TimelineMax();
 						tl.to(target,0,{opacity:1,rotation:0,transformOrigin:'top left'}).
 						to(target,0.2,{opacity:1}).
-						to(target,0.8,{opacity:0,rotation:-90,ease:Ease.easeOut});
+						to(target,0.8,{opacity:0,rotation:-90,ease:Ease.easeOut}).
+						to(target,0,{rotation:0});
 					}
 					
 					this.rotateInUpRight = function(){
@@ -528,7 +611,23 @@
 						var tl = new TimelineMax();
 						tl.to(target,0,{opacity:1,rotation:0,transformOrigin:'top right'}).
 						to(target,0.2,{opacity:1}).
-						to(target,0.8,{opacity:0,rotation:90,ease:Ease.easeOut});
+						to(target,0.8,{opacity:0,rotation:90,ease:Ease.easeOut}).
+						to(target,0,{rotation:0});
+					}
+					
+					this.scale = function(){
+						TweenMax.fromTo(target,1,{'opacity':'0',scale:0.8},{'opacity':'1',scale:1,ease:Quad.easeOut});
+					}
+					
+					this.scaleIn = function(){
+						TweenMax.fromTo(target,1,{'opacity':'0',scale:1.3},{'opacity':'1',scale:1,ease:Quad.easeOut});
+					}
+					
+					this.scaleOut = function(){
+						var tl = new TimelineMax();
+						tl.to(target,0.5,{'opacity':'1',scale:1}).
+						to(target,0.5,{'opacity':'0',scale:1.3,ease:Quad.easeOut}).
+						to(target,0,{scale:1});
 					}
 					
 					thatTween[atype].call(thatTween.tween,null);
