@@ -190,7 +190,7 @@ if (codeEl) {
 "http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineMax.min.js"
 
 <h2>Animation Types</h2>
-	 rotateOutDownLeft
+	rotateOutDownLeft
 	 rotateOutDownRight
 	 rotateOutUpLeft
 	 rotateOutUpRight
@@ -212,13 +212,25 @@ if (codeEl) {
 	 fadeOutLeft
 	 fadeOutRight
 	 fadeOutDown
+	 bounce
+	 bounceInFront
 	 bounceIn
+	 bounceInUp
+	 bounceInDown
+	 bounceInLeft
+	 bounceInRight
+	 bounceOut
+	 bounceOutUp
+	 bounceOutDown
+	 bounceOutLeft
+	 bounceOutRight
 	 rotateIn
 	 flip
 	 swing
 	 wobble
 	 shake
-	 bounce
 	 flash
 	 tada
 	 pulse
+	 scaleIn
+	 scaleOut
