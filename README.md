@@ -117,7 +117,7 @@ slide_animation_data:
 		<tr>
 			<td>third element (animation type)</td>
 			<td>String</td>
-			<td>What type of animation to execute, please refer at the last part at the bottom for the list of animations</td>
+			<td>What type of animation to execute, please refer at the last part at the bottom for the list of animations or go to this link http://cdpn.io/nFdAs</td>
 		</tr>
 	</tbody>
 </table>
@@ -190,6 +190,8 @@ if (codeEl) {
 "http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineMax.min.js"
 
 <h2>Animation Types</h2>
+http://cdpn.io/nFdAs
+
 	rotateOutDownLeft
 	 rotateOutDownRight
 	 rotateOutUpLeft
